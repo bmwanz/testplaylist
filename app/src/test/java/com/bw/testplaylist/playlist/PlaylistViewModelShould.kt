@@ -23,6 +23,7 @@ class PlaylistViewModelShould : BaseUnitTest() {
     private val repository: PlaylistRepository = mock()
     private val playlists = mock<List<Playlist>>()
     private val expected = Result.success(playlists)
+    private val exception = RuntimeException("Something went wrong")
 
     init {
         /** getting called before rule, move to tests */
@@ -53,6 +54,19 @@ class PlaylistViewModelShould : BaseUnitTest() {
         val viewModel = mockSuccessfulCase()
 
         assertEquals(expected, viewModel.playlists.getValueForTest())
+    }
+
+    @Test
+    fun emitErrorWhenReceiveError() {
+        runBlocking {
+            whenever(repository.getPlaylists()).thenReturn(
+                flow {
+                    emit(Result.failure<List<Playlist>>(exception))
+                }
+            )
+        }
+        val viewModel = PlaylistViewModel(repository)
+        assertEquals(exception, viewModel.playlists.getValueForTest()!!.exceptionOrNull())
     }
 
     private fun mockSuccessfulCase() : PlaylistViewModel {
