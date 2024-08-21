@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bw.testplaylist.R
 import com.bw.testplaylist.databinding.ActivityMainBinding
 import com.bw.testplaylist.playlist.PlaylistFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint // enable member injection
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
