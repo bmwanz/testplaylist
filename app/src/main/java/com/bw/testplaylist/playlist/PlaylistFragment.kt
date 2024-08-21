@@ -14,29 +14,15 @@ import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Inject
 
 @AndroidEntryPoint // where we want something injected
 class PlaylistFragment : Fragment() {
 
-    lateinit var viewModel: PlaylistViewModel
+    private lateinit var viewModel: PlaylistViewModel
+
+    @Inject
     lateinit var viewModelFactory: PlaylistViewModelFactory
-
-    /**
-        should not be fragment's responsibility to create and inject components,
-        violating single responsibility of SOLID
-     */
-    private val retrofit = Retrofit.Builder()
-        // default local ip, port set with mockoon
-        // need to double check
-        .baseUrl("http://192.168.0.121:3000/")
-        .client(OkHttpClient())
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
-
-    private val api = retrofit.create(PlaylistAPI::class.java)
-
-    private val service = PlaylistService(api)
-    private val repository = PlaylistRepository(service)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -70,7 +56,6 @@ class PlaylistFragment : Fragment() {
     }
 
     private fun setupViewModel() {
-        viewModelFactory = PlaylistViewModelFactory(repository)
         viewModel = ViewModelProvider(this, viewModelFactory)[PlaylistViewModel::class.java]
     }
 
