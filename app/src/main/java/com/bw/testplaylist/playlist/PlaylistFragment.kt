@@ -1,4 +1,4 @@
-package com.bw.testplaylist.view
+package com.bw.testplaylist.playlist
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,14 +10,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bw.testplaylist.R
-import com.bw.testplaylist.model.Playlist
-import com.bw.testplaylist.viewmodel.PlaylistViewModel
-import com.bw.testplaylist.viewmodel.PlaylistViewModelFactory
 
 class PlaylistFragment : Fragment() {
 
     lateinit var viewModel: PlaylistViewModel
     lateinit var viewModelFactory: PlaylistViewModelFactory
+    lateinit var repository: PlaylistRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,7 +53,7 @@ class PlaylistFragment : Fragment() {
     }
 
     private fun setupViewModel() {
-        viewModelFactory = PlaylistViewModelFactory()
+        viewModelFactory = PlaylistViewModelFactory(repository)
         viewModel = ViewModelProvider(this, viewModelFactory)[PlaylistViewModel::class.java]
     }
 

@@ -1,9 +1,10 @@
-package com.bw.testplaylist.view
+package com.bw.testplaylist.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.bw.testplaylist.R
 import com.bw.testplaylist.databinding.ActivityMainBinding
+import com.bw.testplaylist.playlist.PlaylistFragment
 
 class MainActivity : AppCompatActivity() {
 

@@ -1,12 +1,10 @@
-package com.bw.testplaylist.view
+package com.bw.testplaylist.playlist
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.TextView
 
 import com.bw.testplaylist.databinding.PlaylistItemBinding
-import com.bw.testplaylist.model.Playlist
 
 class MyPlaylistRecyclerViewAdapter(
     private val values: List<Playlist>
