@@ -10,15 +10,21 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bw.testplaylist.R
+import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+@AndroidEntryPoint // where we want something injected
 class PlaylistFragment : Fragment() {
 
     lateinit var viewModel: PlaylistViewModel
     lateinit var viewModelFactory: PlaylistViewModelFactory
 
+    /**
+        should not be fragment's responsibility to create and inject components,
+        violating single responsibility of SOLID
+     */
     private val retrofit = Retrofit.Builder()
         // default local ip, port set with mockoon
         // need to double check
