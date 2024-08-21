@@ -15,7 +15,9 @@ class PlaylistFragment : Fragment() {
 
     lateinit var viewModel: PlaylistViewModel
     lateinit var viewModelFactory: PlaylistViewModelFactory
-    lateinit var repository: PlaylistRepository
+
+    private val service = PlaylistService()
+    private val repository = PlaylistRepository(service)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
