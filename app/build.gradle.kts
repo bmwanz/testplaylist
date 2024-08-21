@@ -62,6 +62,9 @@ dependencies {
     testImplementation("androidx.arch.core:core-testing:2.1.0")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.8")
 
+    testImplementation("org.mockito:mockito-core:5.0.0")
+    androidTestImplementation("org.mockito:mockito-android:3.10.0")
+
     androidTestImplementation("com.jakewharton.espresso:okhttp3-idling-resource:1.0.0")
     androidTestImplementation("androidx.test:runner:1.3.0")
     androidTestImplementation("androidx.test.ext:junit:1.1.2")

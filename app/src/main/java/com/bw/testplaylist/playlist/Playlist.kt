@@ -1,4 +1,4 @@
-package com.bw.testplaylist.model
+package com.bw.testplaylist.playlist
 
 import com.bw.testplaylist.R
 
