@@ -8,10 +8,9 @@ import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
+import org.junit.Assert.assertEquals
 import org.junit.Test
-
-import org.junit.Assert.*
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -40,7 +39,7 @@ class PlaylistViewModelShould : BaseUnitTest() {
     }
 
     @Test
-    fun getPlaylistFromRepository() = runBlockingTest {
+    fun getPlaylistFromRepository() = runTest {
         // only object required to be real, everything else can be mocked
         val viewModel = mockSuccessfulCase()
 
