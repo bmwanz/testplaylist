@@ -1,11 +1,19 @@
 package com.bw.testplaylist.playlist
 
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.flow
 
-class PlaylistService {
+class PlaylistService(
+    private val api: PlaylistAPI
+) {
 
     suspend fun fetchPlaylists() : Flow<Result<List<Playlist>>> {
-        TODO("Not yet implemented")
+        return flow {
+            emit(Result.success(api.fetchAllPlaylists()))
+        }.catch {
+            emit(Result.failure(RuntimeException("Something went wrong")))
+        }
     }
 
 }
