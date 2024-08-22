@@ -10,15 +10,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bw.testplaylist.R
+import com.bw.testplaylist.databinding.FragmentPlaylistBinding
 import dagger.hilt.android.AndroidEntryPoint
-import okhttp3.OkHttpClient
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Inject
 
 @AndroidEntryPoint // where we want something injected
 class PlaylistFragment : Fragment() {
 
+    private lateinit var binding: FragmentPlaylistBinding
     private lateinit var viewModel: PlaylistViewModel
 
     @Inject
@@ -28,21 +27,30 @@ class PlaylistFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_playlist, container, false)
+        binding = FragmentPlaylistBinding.inflate(inflater, container,false)
 
         setupViewModel()
+
+        viewModel.loader.observe(
+            this as LifecycleOwner
+        ) { loading ->
+            when(loading) {
+                true -> binding.loader.visibility = View.VISIBLE
+                else -> binding.loader.visibility = View.VISIBLE
+            }
+        }
 
         viewModel.playlists.observe(
             this as LifecycleOwner
         ) { playlists ->
             if (playlists.getOrNull() != null) {
-                setupList(view, playlists.getOrNull()!!)
+                setupList(binding.playlistsList, playlists.getOrNull()!!)
             } else {
                 // TODO
             }
         }
 
-        return view
+        return binding.root
     }
 
     private fun setupList(
