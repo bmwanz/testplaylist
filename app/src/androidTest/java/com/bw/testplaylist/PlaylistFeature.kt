@@ -12,6 +12,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import com.adevinta.android.barista.assertion.BaristaRecyclerViewAssertions.assertRecyclerViewItemCount
 import com.adevinta.android.barista.assertion.BaristaVisibilityAssertions.assertDisplayed
+import com.adevinta.android.barista.assertion.BaristaVisibilityAssertions.assertNotDisplayed
 import com.adevinta.android.barista.internal.matcher.DrawableMatcher.Companion.withDrawable
 import com.bw.testplaylist.activity.MainActivity
 import org.hamcrest.CoreMatchers.allOf
@@ -55,6 +56,18 @@ class PlaylistFeature {
         onView(allOf(withId(R.id.playlist_image), isDescendantOfA(nthChildOf(withId(R.id.playlists_list), 0))))
             .check(matches(withDrawable(R.mipmap.playlist)))
             .check(matches(isDisplayed()))
+    }
+
+    // loading too fast for loader to show?
+//    @Test
+//    fun displaysLoaderWhileFetchingPlaylists() {
+//        assertDisplayed(R.id.loader)
+//    }
+
+    @Test
+    fun hidesLoader() {
+        Thread.sleep(4000) // simulate http call
+        assertNotDisplayed(R.id.loader)
     }
 
     private fun nthChildOf(parentMatcher: Matcher<View>, childPosition: Int): Matcher<View> {
