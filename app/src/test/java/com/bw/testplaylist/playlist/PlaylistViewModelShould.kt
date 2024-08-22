@@ -72,6 +72,26 @@ class PlaylistViewModelShould : BaseUnitTest() {
         }
     }
 
+    @Test
+    fun closeLoaderAfterPlaylistsLoad() = runTest {
+        val viewModel = mockSuccessfulCase()
+
+        viewModel.loader.captureValues {
+            viewModel.playlists.getValueForTest()
+            assertEquals(false, values.last())
+        }
+    }
+
+    @Test
+    fun closeLoaderAfterError() = runTest {
+        val viewModel = mockErrorCase()
+
+        viewModel.loader.captureValues {
+            viewModel.playlists.getValueForTest()
+            assertEquals(false, values.last())
+        }
+    }
+
     private fun mockSuccessfulCase() : PlaylistViewModel {
         runBlocking {
             whenever(repository.getPlaylists()).thenReturn(

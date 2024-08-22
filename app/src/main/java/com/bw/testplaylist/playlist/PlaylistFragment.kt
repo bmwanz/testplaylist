@@ -9,7 +9,6 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bw.testplaylist.R
 import com.bw.testplaylist.databinding.FragmentPlaylistBinding
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -26,7 +25,7 @@ class PlaylistFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentPlaylistBinding.inflate(inflater, container,false)
 
         setupViewModel()
@@ -36,7 +35,7 @@ class PlaylistFragment : Fragment() {
         ) { loading ->
             when(loading) {
                 true -> binding.loader.visibility = View.VISIBLE
-                else -> binding.loader.visibility = View.VISIBLE
+                else -> binding.loader.visibility = View.GONE
             }
         }
 
